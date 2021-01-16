@@ -44,11 +44,11 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 if(isRegistered) {
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                    finish();
                 }else {
                     startActivity(new Intent(getApplicationContext(), UserRegistrationActivity.class));
-                    finish();
                 }
+                finish();
+
             }
         }, 3000);
 
