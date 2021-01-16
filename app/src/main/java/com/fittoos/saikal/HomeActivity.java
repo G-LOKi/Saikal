@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
             String playerName = sharedPreferences.getString(USER_NAME, "");
 
             String roomID =  roomRef.push().getKey();
-            String path = roomID + Keys.PLAYER_LIST_STR + "/" + Keys.PLAYER1_STR;
+            String path = roomID + "/" + Keys.PLAYER_LIST_STR + "/" + Keys.PLAYER1_STR;
 
             Map<String, Object> player1Details = new HashMap<>();
             player1Details.put("name", playerName);
