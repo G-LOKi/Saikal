@@ -37,6 +37,7 @@ public class JoinRaceActivity extends AppCompatActivity {
     private Button mButtonEnterRace;
     private EditText mEditText;
     private DatabaseReference mDatabaseReference;
+    private DatabaseReference mDatabaseReferenceKeyToRoom;
 
     //Firebase vars
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -48,7 +49,7 @@ public class JoinRaceActivity extends AppCompatActivity {
 
         //****************** link database elements *********************************
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("rooms");
-
+        mDatabaseReferenceKeyToRoom = FirebaseDatabase.getInstance().getReference().child("keytoroom");
 
         //****************** link ui elements *********************************
         mButtonEnterRace = findViewById(R.id.button_enter_race);
@@ -63,46 +64,57 @@ public class JoinRaceActivity extends AppCompatActivity {
             if(raceKey.isEmpty()){
                 Toast.makeText(this, "Ask for the Race Key from your fried or create a new race", Toast.LENGTH_SHORT).show();
             } else {
-                mDatabaseReference.child(raceKey).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                mDatabaseReferenceKeyToRoom.child(raceKey).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String raceFirebaseKey = Objects.requireNonNull(snapshot.getValue()).toString();
+                        mDatabaseReference.child(raceFirebaseKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(USER_DETAILS, Context.MODE_PRIVATE);
-                        boolean isRegistered = sharedPreferences.getBoolean(IS_REGISTERED, false);
-                        String name = sharedPreferences.getString(USER_NAME, "");
+                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(USER_DETAILS, Context.MODE_PRIVATE);
+                                boolean isRegistered = sharedPreferences.getBoolean(IS_REGISTERED, false);
+                                String name = sharedPreferences.getString(USER_NAME, "");
 
-                        if(!isRegistered || name.equals("")){
-                            Toast.makeText(JoinRaceActivity.this, "Your name doesn't exist. register again", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(JoinRaceActivity.this, UserRegistrationActivity.class));
-                            finish();
-                        }else{
+                                if(!isRegistered || name.equals("")){
+                                    Toast.makeText(JoinRaceActivity.this, "Your name doesn't exist. register again", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(JoinRaceActivity.this, UserRegistrationActivity.class));
+                                    finish();
+                                }else{
 
-                            HashMap<String,String> hp = new HashMap<>();
+                                    HashMap<String,String> hp = new HashMap<>();
 
-                            hp.put("name",name);
-                            hp.put("type",USER_TYPE_MEMBER);
+                                    hp.put("name",name);
+                                    hp.put("type",USER_TYPE_MEMBER);
 
-                            mDatabaseReference.child(raceKey).child(PLAYERS_LIST).child(PLAYER2).setValue(hp);
+                                    mDatabaseReference.child(raceFirebaseKey).child(PLAYERS_LIST).child(PLAYER2).setValue(hp);
 
-                            String player1Name = Objects.requireNonNull(snapshot.child(PLAYERS_LIST).child(PLAYER1).child("name").getValue()).toString();
-                            int playerNumber = 2;
-                            String player2Name = name;
+                                    String player1Name = Objects.requireNonNull(snapshot.child(PLAYERS_LIST).child(PLAYER1).child("name").getValue()).toString();
+                                    int playerNumber = 2;
+                                    String player2Name = name;
 
-                            if(player1Name.equals("")){
-                                Toast.makeText(JoinRaceActivity.this, "Player 1 name isn't present, create new race", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                                startActivity(intent);
+                                    if(player1Name.equals("")){
+                                        Toast.makeText(JoinRaceActivity.this, "Player 1 name isn't present, create new race", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+
+                                    Intent intent = new Intent(view.getContext(), MainRaceActivity.class);
+                                    intent.putExtra(PLAYER1,player1Name);
+                                    intent.putExtra(PLAYER2,player2Name);
+                                    intent.putExtra(RACE_KEY,raceKey);
+                                    startActivity(intent);
+
+                                }
+
+
                             }
 
-                            Intent intent = new Intent(view.getContext(), MainRaceActivity.class);
-                            intent.putExtra(PLAYER1,player1Name);
-                            intent.putExtra(PLAYER2,player2Name);
-                            intent.putExtra(RACE_KEY,raceKey);
-                            startActivity(intent);
-
-                        }
-
-
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
                     }
 
                     @Override
@@ -110,6 +122,8 @@ public class JoinRaceActivity extends AppCompatActivity {
                         Toast.makeText(JoinRaceActivity.this, "Key doesn't exist, try again or create your a new race", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+
             }
 
 
