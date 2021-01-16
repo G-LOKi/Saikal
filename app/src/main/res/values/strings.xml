@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RaceMe</string>
+    <string name="your_name_hint">Your Name</string>
+    <string name="username_default_message">Hi Buddy, what friends call you?</string>
+    <string name="user_registration_next_button">Next</string>
 </resources>

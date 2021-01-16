@@ -10,15 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Saikal">
         <activity android:name=".RaceFinishedActivity"></activity>
-        <activity android:name=".MainRaceActivity" />
-        <activity android:name=".JoinRaceActivity" />
-        <activity android:name=".CreateRaceActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".UserRegistrationActivity" />
+        <activity android:name=".MainRaceActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".JoinRaceActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".CreateRaceActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".HomeActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".UserRegistrationActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Saikal.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

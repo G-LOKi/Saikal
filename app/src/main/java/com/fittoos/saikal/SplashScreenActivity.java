@@ -13,6 +13,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.google.android.material.textfield.TextInputEditText;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,11 +44,13 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                 if(isRegistered) {
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                    finish();
                 }else {
                     startActivity(new Intent(getApplicationContext(), UserRegistrationActivity.class));
+                    finish();
                 }
             }
-        }, 5000);
+        }, 3000);
 
 
     }
