@@ -7,10 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class HomeActivity extends AppCompatActivity {
 
     private Button mButtonCreate;
     private Button mButtonJoin;
+
+    //Firebase vars
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +34,15 @@ public class HomeActivity extends AppCompatActivity {
         mButtonCreate.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), CreateRaceActivity.class);
             startActivity(intent);
+            DatabaseReference roomRef = mDatabase.getReference("rooms");
+            String roomID =  roomRef.push().getKey();
+            Map<String, Object> childUpdates = new HashMap<>();
+            childUpdates.put(roomID + "/data", "data");
+            roomRef.updateChildren(childUpdates);
+
         });
 
-        mButtonCreate.setOnClickListener(view -> {
+        mButtonJoin.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), JoinRaceActivity.class);
             startActivity(intent);
         });
