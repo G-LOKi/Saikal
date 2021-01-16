@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class JoinRaceActivity extends AppCompatActivity {
 
     private Button mButtonEnterRace;
+
+    //Firebase vars
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
