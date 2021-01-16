@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:hint="Enter distance"/>
+    <Button
+        android:id="@+id/button_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"/>
     <TextView
         android:id="@+id/room_key"
         android:layout_width="wrap_content"

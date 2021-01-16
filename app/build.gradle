@@ -51,4 +51,7 @@ dependencies {
     // For example, declare the dependencies for Firebase Authentication and Cloud Firestore
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
+
+    // Declare the dependency for the Realtime Database library
+    implementation 'com.google.firebase:firebase-database'
 }
