@@ -23,7 +23,7 @@ import java.util.Map;
 import static com.fittoos.saikal.Keys.GAME_DATA_STR;
 import static com.fittoos.saikal.Keys.PLAYER1_STR;
 import static com.fittoos.saikal.Keys.PLAYER2_STR;
-import static com.fittoos.saikal.Keys.PLAYER_LIST_STR;
+import static com.fittoos.saikal.Keys.PLAYERS_LIST_STR;
 import static com.fittoos.saikal.Keys.ROOMS_STR;
 
 public class CreateRaceActivity extends AppCompatActivity {
@@ -49,7 +49,7 @@ public class CreateRaceActivity extends AppCompatActivity {
         ValueEventListener player2Listener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot!=null)
+                if(snapshot.getValue()!=null)
                 {
                     mLL_ProgressWaitForPlayer.setVisibility(View.GONE);
                     Intent intent = new Intent(getApplicationContext(), MainRaceActivity.class);
@@ -71,7 +71,7 @@ public class CreateRaceActivity extends AppCompatActivity {
             DatabaseReference gameDataRef = mDatabase.getReference(GAME_DATA_STR).child(roomID);
             gameDataRef.child("distance").setValue(Integer.parseInt(mET_InputDistance.getText().toString()));
 
-            DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR).child(roomID).child(PLAYER_LIST_STR).child(PLAYER2_STR);
+            DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR).child(roomID).child(PLAYERS_LIST_STR).child(PLAYER2_STR);
             roomRef.addValueEventListener(player2Listener);
         });
     }

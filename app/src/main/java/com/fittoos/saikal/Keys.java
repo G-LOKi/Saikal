@@ -20,7 +20,7 @@ public class Keys {
     //database path keys
     public static final String KEY_TO_ROOM_STR = "keytoroom";
     public static final String ROOMS_STR = "rooms";
-    public static final String PLAYER_LIST_STR = "playerList";
+    public static final String PLAYERS_LIST_STR = "playersList";
     public static final String PLAYER1_STR = "player1";
     public static final String PLAYER2_STR = "player2";
     public static final String GAME_DATA_STR = "gameData";
