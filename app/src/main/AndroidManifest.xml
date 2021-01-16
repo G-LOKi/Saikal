@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Saikal">
+        <activity android:name=".RaceFinishedActivity"></activity>
+        <activity android:name=".MainRaceActivity" />
+        <activity android:name=".JoinRaceActivity" />
+        <activity android:name=".CreateRaceActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".UserRegistrationActivity" />
         <activity
-            android:name=".FullscreenActivity"
+            android:name=".SplashScreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/Theme.Saikal.Fullscreen">
