@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateRaceActivity">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".CreateRaceActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Distance and send unique key to partner" />
+    <EditText
+        android:id="@+id/input_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter distance"/>
+    <TextView
+        android:id="@+id/room_key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KEY123"
+        android:textSize="36dp"/>
+    <ProgressBar
+        android:id="@+id/progress_wait_for_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Waiting for player to join..."/>
+</LinearLayout>
