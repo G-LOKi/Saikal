@@ -28,12 +28,17 @@
         android:layout_height="wrap_content"
         android:text="KEY123"
         android:textSize="36dp"/>
-    <ProgressBar
-        android:id="@+id/progress_wait_for_player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_progress_wait_for_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Waiting for player to join..."/>
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Waiting for player to join..."/>
+    </LinearLayout>
 </LinearLayout>

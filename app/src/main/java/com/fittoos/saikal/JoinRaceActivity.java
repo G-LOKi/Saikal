@@ -30,11 +30,16 @@ import static com.fittoos.saikal.Keys.USER_DETAILS;
 import static com.fittoos.saikal.Keys.USER_NAME;
 import static com.fittoos.saikal.Keys.USER_TYPE_MEMBER;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class JoinRaceActivity extends AppCompatActivity {
 
     private Button mButtonEnterRace;
     private EditText mEditText;
     private DatabaseReference mDatabaseReference;
+
+    //Firebase vars
+    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
