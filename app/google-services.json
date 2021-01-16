@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "977010480423",
+    "project_id": "raceme-64596",
+    "storage_bucket": "raceme-64596.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977010480423:android:c745018461d243ad7e4502",
+        "android_client_info": {
+          "package_name": "com.fittoos.saikal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977010480423-jf5ptbsj3s60ecljovv3djbjvdlt0247.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fittoos.saikal",
+            "certificate_hash": "2655427edb3118be01fee420e6bf604d2f426e42"
+          }
+        },
+        {
+          "client_id": "977010480423-614c798s536dbkn8pg8v8jgtr6nsp91i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm8jBM3uhZvbpcBB_Y0eIgFxEaDzDP8_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977010480423-614c798s536dbkn8pg8v8jgtr6nsp91i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
