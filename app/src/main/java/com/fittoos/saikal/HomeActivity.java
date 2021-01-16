@@ -40,6 +40,8 @@ public class HomeActivity extends AppCompatActivity {
             childUpdates.put(roomID + "/data", "data");
             roomRef.updateChildren(childUpdates);
 
+            DatabaseReference keyToRoomRef = mDatabase.getReference("keytoroom");
+            keyToRoomRef.child("key123").setValue(roomID);
         });
 
         mButtonJoin.setOnClickListener(view -> {
