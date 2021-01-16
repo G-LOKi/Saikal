@@ -69,7 +69,7 @@ public class CreateRaceActivity extends AppCompatActivity {
 
             String roomID = getIntent().getStringExtra("roomID");
             DatabaseReference gameDataRef = mDatabase.getReference(GAME_DATA_STR).child(roomID);
-            gameDataRef.child("distance").setValue(mET_InputDistance.getText());
+            gameDataRef.child("distance").setValue(Integer.parseInt(mET_InputDistance.getText().toString()));
 
             DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR).child(roomID).child(PLAYER_LIST_STR).child(PLAYER2_STR);
             roomRef.addValueEventListener(player2Listener);
