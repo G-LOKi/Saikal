@@ -129,27 +129,25 @@ public class MainRaceActivity extends AppCompatActivity {
             finish();
         }
 
-
-        //Task2 naming
         //Text UI
         if(getIntent().getStringExtra("userType").equals(USER_TYPE_OWNER))
         {
             mTV_nameSelf.setText(getIntent().getStringExtra(PLAYER1));
+            mTV_nameOther.setText(getIntent().getStringExtra(PLAYER2));
         }
         else
         {
             mTV_nameSelf.setText(getIntent().getStringExtra(PLAYER2));
+            mTV_nameOther.setText(getIntent().getStringExtra(PLAYER1));
         }
 
 
-        // Task1 Race key
-        String roomID = getIntent().getStringExtra("roomID");
 
 
 
         DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR);
-        DatabaseReference player1DistRef = roomRef.child(roomID).child(PLAYERS_LIST_STR).child(PLAYER1_STR).child(DISTANCE_COVERED_STR);
-        DatabaseReference player2DistRef = roomRef.child(roomID).child(PLAYERS_LIST_STR).child(PLAYER2_STR).child(DISTANCE_COVERED_STR);
+        DatabaseReference player1DistRef = roomRef.child(raceFirebaseKey).child(PLAYERS_LIST_STR).child(PLAYER1_STR).child(DISTANCE_COVERED_STR);
+        DatabaseReference player2DistRef = roomRef.child(raceFirebaseKey).child(PLAYERS_LIST_STR).child(PLAYER2_STR).child(DISTANCE_COVERED_STR);
 
         //****************** Firebase event listeners **************************
         roomRef.child(DISTANCE_STR).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -225,12 +223,15 @@ public class MainRaceActivity extends AppCompatActivity {
 
                 }
 
-                if(newDistanceCovered>.020){
+                if(newDistanceCovered>.020) {
                     lastDistance = lastDistance + newDistanceCovered;
                     lastLocation = currentLocation;
 
                     mDatabaseReference.child(DISTANCE_COVERED).setValue(lastDistance);
 
+                    float ratio = (float) lastDistance * 1f / raceDistance;
+                    mV_dummySelf.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1 - ratio));
+                    mRR_positionSelf.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, ratio));
                 }
             }
 

@@ -35,6 +35,7 @@ import static com.fittoos.saikal.Keys.PLAYER1_STR;
 import static com.fittoos.saikal.Keys.PLAYER2;
 import static com.fittoos.saikal.Keys.PLAYER2_STR;
 import static com.fittoos.saikal.Keys.PLAYERS_LIST_STR;
+import static com.fittoos.saikal.Keys.RACE_KEY;
 import static com.fittoos.saikal.Keys.ROOMS_STR;
 import static com.fittoos.saikal.Keys.TYPE_STR;
 
@@ -68,7 +69,7 @@ public class CreateRaceActivity extends AppCompatActivity {
                 {
                     mLL_ProgressWaitForPlayer.setVisibility(View.GONE);
                     Intent intent = new Intent(getApplicationContext(), MainRaceActivity.class);
-                    intent.putExtra("roomID", roomID);
+                    intent.putExtra(RACE_KEY, roomID);
                     intent.putExtra(PLAYER1, getIntent().getStringArrayExtra("playerName"));
                     intent.putExtra(PLAYER2, snapshot.child(NAME_STR).getValue(String.class));
                     intent.putExtra("userType", OWNER);
