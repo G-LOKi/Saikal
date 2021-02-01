@@ -28,6 +28,7 @@ import static com.fittoos.saikal.Keys.PLAYERS_LIST;
 import static com.fittoos.saikal.Keys.RACE_KEY;
 import static com.fittoos.saikal.Keys.USER_DETAILS;
 import static com.fittoos.saikal.Keys.USER_NAME;
+import static com.fittoos.saikal.Keys.USER_TYPE;
 import static com.fittoos.saikal.Keys.USER_TYPE_MEMBER;
 
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,9 +39,6 @@ public class JoinRaceActivity extends AppCompatActivity {
     private EditText mEditText;
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mDatabaseReferenceKeyToRoom;
-
-    //Firebase vars
-    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +101,8 @@ public class JoinRaceActivity extends AppCompatActivity {
                                     Intent intent = new Intent(view.getContext(), MainRaceActivity.class);
                                     intent.putExtra(PLAYER1,player1Name);
                                     intent.putExtra(PLAYER2,player2Name);
-                                    intent.putExtra(RACE_KEY,raceKey);
+                                    intent.putExtra(USER_TYPE,USER_TYPE_MEMBER);
+                                    intent.putExtra(RACE_KEY,raceFirebaseKey);
                                     startActivity(intent);
 
                                 }

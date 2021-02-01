@@ -38,6 +38,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    //For location access
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+
+    //For easy coding
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     //Firebase
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.3.0')

@@ -1,14 +1,21 @@
 package com.fittoos.saikal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,6 +29,9 @@ import static com.fittoos.saikal.Keys.USER_DETAILS;
 import static com.fittoos.saikal.Keys.USER_NAME;
 
 public class HomeActivity extends AppCompatActivity {
+
+
+    private static final int MY_PERMISSION_REQUEST_FINE_LOCATION = 101;
 
     private Button mButtonCreate;
     private Button mButtonJoin;
@@ -40,30 +50,87 @@ public class HomeActivity extends AppCompatActivity {
 
         //****************** onClick Listeners of buttons **********************
         mButtonCreate.setOnClickListener(view -> {
-            DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(USER_DETAILS, Context.MODE_PRIVATE);
-            String playerName = sharedPreferences.getString(USER_NAME, "");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSION_REQUEST_FINE_LOCATION);
 
-            String roomID =  roomRef.push().getKey();
-            String path = roomID + "/" + Keys.PLAYERS_LIST_STR + "/" + Keys.PLAYER1_STR;
+            } else {
+                DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR);
 
-            Map<String, Object> player1Details = new HashMap<>();
-            player1Details.put("name", playerName);
-            player1Details.put("type", OWNER);
-            roomRef.child(path).setValue(player1Details);
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(USER_DETAILS, Context.MODE_PRIVATE);
+                String playerName = sharedPreferences.getString(USER_NAME, "");
 
-            DatabaseReference keyToRoomRef = mDatabase.getReference(Keys.KEY_TO_ROOM_STR);
-            keyToRoomRef.child("key123").setValue(roomID);
+                String roomID =  roomRef.push().getKey();
+                String path = roomID + "/" + Keys.PLAYERS_LIST_STR + "/" + Keys.PLAYER1_STR;
 
-            Intent intent = new Intent(view.getContext(), CreateRaceActivity.class);
-            intent.putExtra("roomID", roomID);
-            startActivity(intent);
+                Map<String, Object> player1Details = new HashMap<>();
+                player1Details.put("name", playerName);
+                player1Details.put("type", OWNER);
+                roomRef.child(path).setValue(player1Details);
+
+                DatabaseReference keyToRoomRef = mDatabase.getReference(Keys.KEY_TO_ROOM_STR);
+                keyToRoomRef.child("key123").setValue(roomID);
+
+                Intent intent = new Intent(view.getContext(), CreateRaceActivity.class);
+                intent.putExtra("roomID", roomID);
+                startActivity(intent);
+            }
         });
 
         mButtonJoin.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), JoinRaceActivity.class);
-            startActivity(intent);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        MY_PERMISSION_REQUEST_FINE_LOCATION);
+
+            } else {
+                Intent intent = new Intent(view.getContext(), JoinRaceActivity.class);
+                startActivity(intent);
+            }
+
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    MY_PERMISSION_REQUEST_FINE_LOCATION);
+
+        } else {
+            //do nothing
+        }
+
+
+    }
+
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case MY_PERMISSION_REQUEST_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    //do nothing
+                } else {
+
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                            MY_PERMISSION_REQUEST_FINE_LOCATION);
+
+                    Toast.makeText(getApplicationContext(), "This app requires location permissions to be granted", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }

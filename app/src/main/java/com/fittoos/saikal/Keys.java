@@ -12,10 +12,14 @@ public class Keys {
     public static final String PLAYER2 = "player2";
     public static final String PLAYER1 = "player1";
 
+
     public static final String RACE_KEY = "raceKey";
 
+    public static final String USER_TYPE = "userType";
     public static final String USER_TYPE_OWNER = "owner";
     public static final String USER_TYPE_MEMBER = "member";
+
+    public static final String DISTANCE_COVERED = "distanceCovered";
 
     //database path keys
     public static final String KEY_TO_ROOM_STR = "keytoroom";
