@@ -15,65 +15,97 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:orientation="horizontal">
-        <FrameLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="10dp">
-            <LinearLayout
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:background="@color/teal_200"
-                android:layout_gravity="center">
-            </LinearLayout>
-            <LinearLayout
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9"/>
-                <RelativeLayout
+                android:layout_height="0dp"
+                android:layout_weight="0.99">
+                <LinearLayout
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/teal_200"
+                    android:layout_gravity="center">
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1">
-                <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle" />
-                </RelativeLayout>
-            </LinearLayout>
-        </FrameLayout>
-        <FrameLayout
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <View
+                        android:id="@+id/dummy_self"
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.9"/>
+                    <RelativeLayout
+                        android:id="@+id/avatar_position_self"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1">
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/circle" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/name_self"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="24dp"
+                android:layout_weight="0.01"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="10dp">
-            <LinearLayout
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:background="@color/teal_200"
-                android:layout_gravity="center">
-            </LinearLayout>
-            <LinearLayout
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-                <View
-                    android:layout_width="10dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9"/>
-                <RelativeLayout
+                android:layout_height="0dp"
+                android:layout_weight="0.99">
+                <LinearLayout
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/teal_200"
+                    android:layout_gravity="center">
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1">
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:background="@drawable/circle2" />
-                </RelativeLayout>
-            </LinearLayout>
-        </FrameLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <View
+                        android:id="@+id/dummy_other"
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.9"/>
+                    <RelativeLayout
+                        android:id="@+id/avatar_position_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.1">
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/circle2" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/name_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="24dp"
+                android:layout_weight="0.01"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
