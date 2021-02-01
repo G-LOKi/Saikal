@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //****************** onClick Listeners of buttons **********************
         mButtonCreate.setOnClickListener(view -> {
+
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -57,26 +58,14 @@ public class HomeActivity extends AppCompatActivity {
                         MY_PERMISSION_REQUEST_FINE_LOCATION);
 
             } else {
-                DatabaseReference roomRef = mDatabase.getReference(ROOMS_STR);
-
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(USER_DETAILS, Context.MODE_PRIVATE);
                 String playerName = sharedPreferences.getString(USER_NAME, "");
 
-                String roomID =  roomRef.push().getKey();
-                String path = roomID + "/" + Keys.PLAYERS_LIST_STR + "/" + Keys.PLAYER1_STR;
-
-                Map<String, Object> player1Details = new HashMap<>();
-                player1Details.put("name", playerName);
-                player1Details.put("type", OWNER);
-                roomRef.child(path).setValue(player1Details);
-
-                DatabaseReference keyToRoomRef = mDatabase.getReference(Keys.KEY_TO_ROOM_STR);
-                keyToRoomRef.child("key123").setValue(roomID);
-
                 Intent intent = new Intent(view.getContext(), CreateRaceActivity.class);
-                intent.putExtra("roomID", roomID);
+                intent.putExtra("playerName", playerName);
                 startActivity(intent);
             }
+
         });
 
         mButtonJoin.setOnClickListener(view -> {

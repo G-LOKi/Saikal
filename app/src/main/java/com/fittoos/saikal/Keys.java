@@ -28,6 +28,10 @@ public class Keys {
     public static final String PLAYER1_STR = "player1";
     public static final String PLAYER2_STR = "player2";
     public static final String GAME_DATA_STR = "gameData";
+    public static final String DISTANCE_COVERED_STR = "distCovered";
+    public static final String NAME_STR = "name";
+    public static final String TYPE_STR = "type";
+    public static final String DISTANCE_STR = "distance";
 
     //database value keys
     public static final String OWNER = "owner";

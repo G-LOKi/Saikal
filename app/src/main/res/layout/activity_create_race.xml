@@ -26,7 +26,7 @@
         android:id="@+id/room_key"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="KEY123"
+        android:text=""
         android:textSize="36dp"/>
     <LinearLayout
         android:id="@+id/ll_progress_wait_for_player"
